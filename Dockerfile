@@ -28,6 +28,6 @@ RUN npm run build
 
 ENV DOCKER_CONTAINER=true
 
-ENTRYPOINT ["node", "dist/main.js"]
+CMD ["node", "bin.js"]
 
 # docker run -it --entr
