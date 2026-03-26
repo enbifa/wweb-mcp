@@ -202,7 +202,7 @@ async function startWhatsAppApiServer(whatsAppConfig: WhatsAppConfig, port: numb
     }
     next();
   });
-  app.use('/api', routerFactory(client));
+  app.use('/api', routerFactory(client, whatsAppConfig.authDataPath || '.wwebjs_auth'));
   app.use(errorHandler);
   app.listen(port, () => {
     logger.info(`WhatsApp Web Client API started successfully on port ${port}`);

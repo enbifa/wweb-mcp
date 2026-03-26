@@ -2,7 +2,9 @@ import express, { Request, Response, Router } from 'express';
 import { Client } from 'whatsapp-web.js';
 import { WhatsAppService } from './whatsapp-service';
 import logger from './logger';
-export function routerFactory(client: Client): Router {
+import fs from 'fs';
+import path from 'path';
+export function routerFactory(client: Client, authDataPath: string = '.wwebjs_auth'): Router {
   // Create a router instance
   const router: Router = express.Router();
   const whatsappService = new WhatsAppService(client);
@@ -31,6 +33,32 @@ export function routerFactory(client: Client): Router {
         details: error instanceof Error ? error.message : String(error),
       });
     }
+  });
+
+  /**
+   * @swagger
+   * /api/qr:
+   *   get:
+   *     summary: Get the QR code image for WhatsApp authentication
+   *     responses:
+   *       200:
+   *         description: Returns the QR code PNG image
+   *         content:
+   *           image/png:
+   *             schema:
+   *               type: string
+   *               format: binary
+   *       404:
+   *         description: QR code not available yet
+   */
+  router.get('/qr', (_req: Request, res: Response) => {
+    const qrImagePath = path.join(authDataPath, 'qr.png');
+    if (!fs.existsSync(qrImagePath)) {
+      res.status(404).json({ error: 'QR code not available yet' });
+      return;
+    }
+    res.setHeader('Content-Type', 'image/png');
+    res.sendFile(qrImagePath, { root: '/' });
   });
 
   /**
