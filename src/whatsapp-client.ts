@@ -78,10 +78,11 @@ export function createWhatsAppClient(config: WhatsAppConfig = {}): Client {
 
   // Generate QR code when needed
   client.on('qr', (qr: string) => {
-    // Display QR code in terminal
+    // Print QR code directly to stdout to avoid logger formatting adding extra spaces
     qrcode.generate(qr, { small: true }, qrcode => {
-      logger.info(`QR code generated. Scan it with your phone to log in.\n${qrcode}`);
+      console.log(qrcode);
     });
+    logger.info('QR code generated. Scan it with your phone to log in.');
   });
 
   // Handle ready event
