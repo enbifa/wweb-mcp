@@ -20,6 +20,8 @@ WORKDIR /project
 
 # Copy all necessary files first
 COPY package*.json tsconfig.json ./
+COPY bin.js ./
+COPY bin/ ./bin/
 COPY src/ ./src/
 
 # Then install and build
