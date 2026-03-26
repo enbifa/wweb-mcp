@@ -1,5 +1,5 @@
 import { Client, LocalAuth, Message, NoAuth } from 'whatsapp-web.js';
-import qrcode from 'qrcode-terminal';
+import QRCode from 'qrcode';
 import logger from './logger';
 import fs from 'fs';
 import path from 'path';
@@ -77,12 +77,14 @@ export function createWhatsAppClient(config: WhatsAppConfig = {}): Client {
   });
 
   // Generate QR code when needed
-  client.on('qr', (qr: string) => {
-    // Print QR code directly to stdout to avoid logger formatting adding extra spaces
-    qrcode.generate(qr, { small: true }, qrcode => {
-      console.log(qrcode);
-    });
-    logger.info('QR code generated. Scan it with your phone to log in.');
+  client.on('qr', async (qr: string) => {
+    const qrImagePath = path.join(authDataPath, 'qr.png');
+    try {
+      await QRCode.toFile(qrImagePath, qr, { type: 'png' });
+      logger.info(`QR code image saved to ${qrImagePath}. Open the file to scan it with your phone.`);
+    } catch (error) {
+      logger.error(`Failed to save QR code image: ${error}`);
+    }
   });
 
   // Handle ready event
