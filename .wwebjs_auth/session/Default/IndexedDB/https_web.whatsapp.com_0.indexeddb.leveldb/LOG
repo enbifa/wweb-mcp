@@ -1,0 +1,65 @@
+2026/03/27-19:21:46.610 d7e0b4 Reusing MANIFEST /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/03/27-19:21:46.611 d7e0b4 Recovering log #1307
+2026/03/27-19:21:46.646 d7e0b4 Reusing old log /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/001307.log 
+2026/03/27-19:21:46.647 d7e0b4 Delete type=2 #1294
+2026/03/27-19:21:46.647 d7e0b4 Delete type=2 #1295
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1268
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1269
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1292
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1293
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1291
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1290
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1270
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1310
+2026/03/27-19:21:46.648 d7e0b4 Delete type=2 #1271
+2026/03/27-19:21:50.363 d7e0b6 Level-0 table #1332: started
+2026/03/27-19:21:50.407 d7e0b6 Level-0 table #1332: 1113674 bytes OK
+2026/03/27-19:21:50.422 d7e0b6 Delete type=0 #1307
+2026/03/27-19:21:50.458 d7e0b6 Compacting 1@0 + 1@1 files
+2026/03/27-19:21:50.482 d7e0b6 Generated table #1333@0: 29527 keys, 559923 bytes
+2026/03/27-19:21:50.488 d7e0b6 Generated table #1334@0: 2012 keys, 46843 bytes
+2026/03/27-19:21:50.526 d7e0b6 Generated table #1335@0: 10116 keys, 227671 bytes
+2026/03/27-19:21:50.526 d7e0b6 Compacted 1@0 + 1@1 files => 834437 bytes
+2026/03/27-19:21:50.536 d7e0b6 compacted to: files[ 0 3 33 0 0 0 0 ]
+2026/03/27-19:21:50.648 d7e0ce Compacting 1@1 + 12@2 files
+2026/03/27-19:21:50.701 d7e0ce Generated table #1336@1: 29360 keys, 2271070 bytes
+2026/03/27-19:21:50.747 d7e0ce Generated table #1337@1: 28756 keys, 2265893 bytes
+2026/03/27-19:21:50.795 d7e0ce Generated table #1338@1: 28640 keys, 2245480 bytes
+2026/03/27-19:21:50.846 d7e0ce Generated table #1339@1: 18219 keys, 2249561 bytes
+2026/03/27-19:21:50.887 d7e0ce Generated table #1340@1: 6603 keys, 2125385 bytes
+2026/03/27-19:21:50.924 d7e0ce Generated table #1341@1: 5308 keys, 2125802 bytes
+2026/03/27-19:21:50.970 d7e0ce Generated table #1342@1: 5732 keys, 2123515 bytes
+2026/03/27-19:21:51.020 d7e0ce Generated table #1343@1: 94045 keys, 2241451 bytes
+2026/03/27-19:21:51.071 d7e0ce Generated table #1344@1: 98256 keys, 2246148 bytes
+2026/03/27-19:21:51.120 d7e0ce Generated table #1345@1: 98981 keys, 2248797 bytes
+2026/03/27-19:21:51.128 d7e0ce Generated table #1346@1: 13497 keys, 304236 bytes
+2026/03/27-19:21:51.128 d7e0ce Compacted 1@1 + 12@2 files => 22447338 bytes
+2026/03/27-19:21:51.130 d7e0ce compacted to: files[ 0 2 32 0 0 0 0 ]
+2026/03/27-19:21:51.131 d7e0ce Delete type=2 #1332
+2026/03/27-19:21:51.131 d7e0ce Delete type=2 #1311
+2026/03/27-19:21:51.180 d7e0b6 Compacting 1@1 + 13@2 files
+2026/03/27-19:21:51.225 d7e0b6 Generated table #1347@1: 71713 keys, 2235036 bytes
+2026/03/27-19:21:51.303 d7e0b6 Generated table #1348@1: 43591 keys, 2211296 bytes
+2026/03/27-19:21:51.328 d7e0b6 Generated table #1349@1: 2015 keys, 2147627 bytes
+2026/03/27-19:21:51.355 d7e0b6 Generated table #1350@1: 2699 keys, 2152484 bytes
+2026/03/27-19:21:51.382 d7e0b6 Generated table #1351@1: 2599 keys, 2155256 bytes
+2026/03/27-19:21:51.415 d7e0b6 Generated table #1352@1: 2375 keys, 2154558 bytes
+2026/03/27-19:21:51.436 d7e0b6 Generated table #1353@1: 2225 keys, 2162814 bytes
+2026/03/27-19:21:51.456 d7e0b6 Generated table #1354@1: 2213 keys, 2146253 bytes
+2026/03/27-19:21:51.481 d7e0b6 Generated table #1355@1: 2516 keys, 2143890 bytes
+2026/03/27-19:21:51.503 d7e0b6 Generated table #1356@1: 2930 keys, 2030295 bytes
+2026/03/27-19:21:51.503 d7e0b6 Compacted 1@1 + 13@2 files => 21539509 bytes
+2026/03/27-19:21:51.506 d7e0b6 compacted to: files[ 0 1 29 0 0 0 0 ]
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1243
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1323
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1322
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1334
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1321
+2026/03/27-19:21:51.507 d7e0b6 Delete type=2 #1325
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1324
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1326
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1327
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1329
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1328
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1273
+2026/03/27-19:21:51.508 d7e0b6 Delete type=2 #1272
