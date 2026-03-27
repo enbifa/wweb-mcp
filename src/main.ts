@@ -188,9 +188,7 @@ async function startWhatsAppApiServer(
 ): Promise<void> {
   logger.info('Starting WhatsApp Web REST API...');
 
-  const resolvedPort = Number(
-    requestedPort ?? process.env.PORT ?? 3001
-  );
+  const resolvedPort = Number(requestedPort ?? process.env.PORT ?? 3001);
 
   if (!Number.isInteger(resolvedPort) || resolvedPort < 0 || resolvedPort > 65535) {
     throw new Error(
@@ -199,8 +197,6 @@ async function startWhatsAppApiServer(
   }
 
   const client = createWhatsAppClient(whatsAppConfig);
-  await client.initialize();
-
   const apiKey = await getWhatsAppApiKey(whatsAppConfig);
   logger.info(`WhatsApp API key: ${apiKey}`);
 
@@ -208,12 +204,24 @@ async function startWhatsAppApiServer(
   app.use(requestLogger);
   app.use(express.json());
 
+  // Healthcheck pubblico
+  app.get('/healthz', (_req: Request, res: Response) => {
+    res.status(200).json({ ok: true });
+  });
+
+  // Auth solo per le API vere
   app.use((req: Request, res: Response, next: NextFunction) => {
+    if (req.path === '/healthz') {
+      next();
+      return;
+    }
+
     const authHeader = req.headers['authorization'];
     if (!authHeader || authHeader !== `Bearer ${apiKey}`) {
       res.status(401).json({ error: 'Unauthorized' });
       return;
     }
+
     next();
   });
 
@@ -223,6 +231,16 @@ async function startWhatsAppApiServer(
   app.listen(resolvedPort, '0.0.0.0', () => {
     logger.info(`WhatsApp Web Client API started successfully on 0.0.0.0:${resolvedPort}`);
   });
+
+  // Inizializzazione WhatsApp in background, senza bloccare il web server
+  client
+    .initialize()
+    .then(() => {
+      logger.info('WhatsApp client initialized successfully');
+    })
+    .catch((error) => {
+      logger.error('WhatsApp client initialization failed:', error);
+    });
 
   process.on('SIGINT', async () => {
     logger.info('Shutting down WhatsApp Web Client API...');
