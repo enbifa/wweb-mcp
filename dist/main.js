@@ -82,7 +82,6 @@ function parseCommandLineArgs() {
         .option('api-port', {
         description: 'Port for WhatsApp API server',
         type: 'number',
-        default: 3001,
     })
         .option('auth-data-path', {
         alias: 'a',
@@ -193,16 +192,28 @@ async function getWhatsAppApiKey(whatsAppConfig) {
     }
     return fs_1.default.readFileSync(apiKeyPath, 'utf8');
 }
-async function startWhatsAppApiServer(whatsAppConfig, port) {
+async function startWhatsAppApiServer(whatsAppConfig, requestedPort) {
     logger_1.default.info('Starting WhatsApp Web REST API...');
+    const resolvedPort = Number(requestedPort ?? process.env.PORT ?? 3001);
+    if (!Number.isInteger(resolvedPort) || resolvedPort < 0 || resolvedPort > 65535) {
+        throw new Error(`Invalid port. requestedPort=${String(requestedPort)} env.PORT=${String(process.env.PORT)}`);
+    }
     const client = (0, whatsapp_client_1.createWhatsAppClient)(whatsAppConfig);
-    await client.initialize();
     const apiKey = await getWhatsAppApiKey(whatsAppConfig);
     logger_1.default.info(`WhatsApp API key: ${apiKey}`);
     const app = (0, express_1.default)();
     app.use(middleware_1.requestLogger);
     app.use(express_1.default.json());
+    // Healthcheck pubblico
+    app.get('/healthz', (_req, res) => {
+        res.status(200).json({ ok: true });
+    });
+    // Auth solo per le API vere
     app.use((req, res, next) => {
+        if (req.path === '/healthz') {
+            next();
+            return;
+        }
         const authHeader = req.headers['authorization'];
         if (!authHeader || authHeader !== `Bearer ${apiKey}`) {
             res.status(401).json({ error: 'Unauthorized' });
@@ -212,10 +223,18 @@ async function startWhatsAppApiServer(whatsAppConfig, port) {
     });
     app.use('/api', (0, api_1.routerFactory)(client, whatsAppConfig.authDataPath || '.wwebjs_auth'));
     app.use(middleware_1.errorHandler);
-    app.listen(port, () => {
-        logger_1.default.info(`WhatsApp Web Client API started successfully on port ${port}`);
+    app.listen(resolvedPort, '0.0.0.0', () => {
+        logger_1.default.info(`WhatsApp Web Client API started successfully on 0.0.0.0:${resolvedPort}`);
     });
-    // Keep the process running
+    // Inizializzazione WhatsApp in background, senza bloccare il web server
+    client
+        .initialize()
+        .then(() => {
+        logger_1.default.info('WhatsApp client initialized successfully');
+    })
+        .catch((error) => {
+        logger_1.default.error('WhatsApp client initialization failed:', error);
+    });
     process.on('SIGINT', async () => {
         logger_1.default.info('Shutting down WhatsApp Web Client API...');
         await client.destroy();
