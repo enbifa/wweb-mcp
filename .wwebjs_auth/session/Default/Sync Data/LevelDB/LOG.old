@@ -1,2 +1,3 @@
-2026/03/27-19:16:17.179 d7a076 Creating DB /Users/p103650/Downloads/wweb-mcp-main/.wwebjs_auth/session/Default/Sync Data/LevelDB since it was missing.
-2026/03/27-19:16:17.237 d7a076 Reusing MANIFEST /Users/p103650/Downloads/wweb-mcp-main/.wwebjs_auth/session/Default/Sync Data/LevelDB/MANIFEST-000001
+2026/03/27-23:36:18.145 dfd921 Reusing MANIFEST /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Sync Data/LevelDB/MANIFEST-000001
+2026/03/27-23:36:18.159 dfd921 Recovering log #3
+2026/03/27-23:36:18.160 dfd921 Reusing old log /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Sync Data/LevelDB/000003.log 
