@@ -48,7 +48,6 @@ function parseCommandLineArgs(): ReturnType<typeof yargs.parseSync> {
     .option('api-port', {
       description: 'Port for WhatsApp API server',
       type: 'number',
-      default: 3001,
     })
     .option('auth-data-path', {
       alias: 'a',
@@ -183,8 +182,22 @@ async function getWhatsAppApiKey(whatsAppConfig: WhatsAppConfig): Promise<string
   return fs.readFileSync(apiKeyPath, 'utf8');
 }
 
-async function startWhatsAppApiServer(whatsAppConfig: WhatsAppConfig, port: number): Promise<void> {
+async function startWhatsAppApiServer(
+  whatsAppConfig: WhatsAppConfig,
+  requestedPort?: number,
+): Promise<void> {
   logger.info('Starting WhatsApp Web REST API...');
+
+  const resolvedPort = Number(
+    requestedPort ?? process.env.PORT ?? 3001
+  );
+
+  if (!Number.isInteger(resolvedPort) || resolvedPort < 0 || resolvedPort > 65535) {
+    throw new Error(
+      `Invalid port. requestedPort=${String(requestedPort)} env.PORT=${String(process.env.PORT)}`
+    );
+  }
+
   const client = createWhatsAppClient(whatsAppConfig);
   await client.initialize();
 
@@ -194,6 +207,7 @@ async function startWhatsAppApiServer(whatsAppConfig: WhatsAppConfig, port: numb
   const app = express();
   app.use(requestLogger);
   app.use(express.json());
+
   app.use((req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
     if (!authHeader || authHeader !== `Bearer ${apiKey}`) {
@@ -202,13 +216,14 @@ async function startWhatsAppApiServer(whatsAppConfig: WhatsAppConfig, port: numb
     }
     next();
   });
+
   app.use('/api', routerFactory(client, whatsAppConfig.authDataPath || '.wwebjs_auth'));
   app.use(errorHandler);
-  app.listen(port, () => {
-    logger.info(`WhatsApp Web Client API started successfully on port ${port}`);
+
+  app.listen(resolvedPort, '0.0.0.0', () => {
+    logger.info(`WhatsApp Web Client API started successfully on 0.0.0.0:${resolvedPort}`);
   });
 
-  // Keep the process running
   process.on('SIGINT', async () => {
     logger.info('Shutting down WhatsApp Web Client API...');
     await client.destroy();
