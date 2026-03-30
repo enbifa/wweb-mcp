@@ -1,6 +1,3 @@
-2026/03/27-23:36:18.214 dfd997 Reusing MANIFEST /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
-2026/03/27-23:36:18.217 dfd997 Recovering log #4
-2026/03/27-23:36:18.219 dfd997 Reusing old log /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Local Storage/leveldb/000004.log 
-2026/03/27-23:37:18.224 dfd99a Level-0 table #8: started
-2026/03/27-23:37:18.227 dfd99a Level-0 table #8: 14035 bytes OK
-2026/03/27-23:37:18.230 dfd99a Delete type=0 #4
+2026/03/27-23:39:21.190 dffee5 Reusing MANIFEST /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/03/27-23:39:21.192 dffee5 Recovering log #7
+2026/03/27-23:39:21.193 dffee5 Reusing old log /Users/p103650/Downloads/wweb-mcp-main/wweb-mcp/.wwebjs_auth/session/Default/Local Storage/leveldb/000007.log 
